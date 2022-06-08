@@ -1,16 +1,16 @@
 import React from 'react'
 import './css/style.css'
 
-export function TabDetails() {
+export function TabDetails({ name, temp, weather, sunrise, sunset, feelsLike }) {
     return (
         <div id="Details" className="tab_block tab_Details">
-            <p id='currentCityDetails' className="tabCity_2">Moscow</p>
+            <p className="tabCity_2">{name}</p>
             <ul>
-                <li className="weather">Temprature: <span id="detailsTemprature">20.2</span>°</li>
-                <li className="weather">Feels like: <span id="detailsFeelsLike">19.0</span>°</li>
-                <li className="weather">Weather: <span id="detailsWeather">Clouds</span></li>
-                <li className="weather">Sunrise: <span id="detailsSunrise">7:48</span></li>
-                <li className="weather">Sunset: <span id="detailsSunset">1:8</span></li>
+                <li className="weather">Temprature: {temp}°</li>
+                <li className="weather">Feels like: {feelsLike}°</li>
+                <li className="weather">Weather: {weather}</li>
+                <li className="weather">Sunrise: {sunrise}</li>
+                <li className="weather">Sunset: {sunset}</li>
             </ul>
         </div>
     );

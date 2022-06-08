@@ -6,7 +6,7 @@ import {
 export async function serverRequest(url) {
     const serverRequest = await fetch(url)
     const serverAnswer = await serverRequest.json()
-    return serverAnswer
+    return await serverAnswer
 }
 
 export function compilationURLCurrentWeather(cityName) {
