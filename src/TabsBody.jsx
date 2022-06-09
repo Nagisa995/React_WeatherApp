@@ -15,28 +15,23 @@ import {
     compilationURLForecast
 } from './api'
 import {
-    temperatureDegrees,
-    time,
-} from './utils'
-import {
-    infoDefault
+    infoDefault,
+    infoForecastDefault
 } from './const'
 
-export function TabsBody({ city }) {
+export function TabsBody({ city, addCityInList }) {
     const [weatherInfo, setWeatherInfo] = useState(infoDefault);
-    const [weatherForecastInfo, setWeatherForecastInfo] = useState();
+    const [weatherForecastInfo, setWeatherForecastInfo] = useState(infoForecastDefault);
 
     useEffect(() => {
         serverRequest(compilationURLCurrentWeather(city)).then(result => setWeatherInfo(result));
         serverRequest(compilationURLForecast(city)).then(result => setWeatherForecastInfo(result));
     }, [city])
 
-    console.log(weatherInfo);
-
     return (
         <div className="tabs_body">
-            <TabNow name={weatherInfo.name} temperature={temperatureDegrees(weatherInfo.main.temp)} icon={weatherInfo.weather[0].icon} />
-            <TabDetails name={weatherInfo.name} temp={temperatureDegrees(weatherInfo.main.temp)} weather={weatherInfo.weather[0].main} sunrise={time(weatherInfo.sys.sunrise)} sunset={time(weatherInfo.sys.sunset)} feelsLike={temperatureDegrees(weatherInfo.main.feels_like)} />
+            <TabNow info={weatherInfo} addCityInList={addCityInList}/>
+            <TabDetails info={weatherInfo} />
             <TabForecast info={weatherForecastInfo} />
         </div>
     );

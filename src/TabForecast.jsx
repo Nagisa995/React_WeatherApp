@@ -1,28 +1,60 @@
 import React from 'react'
 import './css/style.css'
+import {
+    temperatureDegrees,
+    dateFromString,
+    time,
+    weatherIconURL
+} from './utils'
 
-export function TabForecast() {
+export function TabForecast({ info }) {
+    const {
+        city: {
+            name
+        },
+        list
+    } = info;
+
+    const forecastList = list.map(element => <ForecastElement info={element} />);
+
     return (
         <div id="Forecast" className="tab_block tab_Forecast">
-            <p id='currentCityForecast'>Moscow</p>
-            <ul id='forecastList'>
-                <li>
-                    <div className="weather_Time">
-                        <div className="top_left">7 June</div>
-                        <div className="bottom_left">
-                            <ul>
-                                <li>Temperature: 19.9°</li>
-                                <li>Feels like: 18.7°</li>
-                            </ul>
-                        </div>
-                        <div className="top_right">22:00</div>
-                        <div className="bottom_right">
-                            <span className="block">Clear</span>
-                            <img src="http://openweathermap.org/img/wn/01d@2x.png"/>
-                        </div>
-                    </div>
-                </li>
+            <p>{name}</p>
+            <ul>
+                {forecastList}
             </ul>
         </div>
     );
+}
+
+function ForecastElement({ info }) {
+
+    const {
+        dt_txt,
+        dt,
+        main: {
+            temp,
+            feels_like
+        },
+        weather: [{ icon, main }],
+    } = info;
+
+    return (
+        <li>
+            <div className="weather_Time">
+                <div className="top_left">{dateFromString(dt_txt)}</div>
+                <div className="bottom_left">
+                    <ul>
+                        <li>Temperature: {temperatureDegrees(temp)}°</li>
+                        <li>Feels like: {temperatureDegrees(feels_like)}°</li>
+                    </ul>
+                </div>
+                <div className="top_right">{time(dt)}0</div>
+                <div className="bottom_right">
+                    <span className="block">{main}</span>
+                    <img src={weatherIconURL(icon)} />
+                </div>
+            </div>
+        </li>
+    )
 }

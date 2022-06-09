@@ -1,20 +1,23 @@
-import { React, useEffect, useState } from 'react'
+import { React, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import './css/style.css'
-import Cookies from 'js-cookie'
 import {
   SearchForm
 } from './SearchForm'
 import {
   UIContent
 } from './UIContent'
+import{
+  addCurrentCityInStorage,
+  getCurrentCityFromStorage
+} from './utils'
 import {
   defaultCity
 } from './const'
 
 
 function Main() {
-  const [currentCity, setCurrentCity] = useState(defaultCity);
+  const [currentCity, setCurrentCity] = useState(getCurrentCityFromStorage()??defaultCity);
   const [searchCityInputValue, setSearchCityInputValue] = useState('');
   
 
@@ -25,12 +28,16 @@ function Main() {
   function handleSearchSubmit(e) {
     e.preventDefault;
 
+    addCurrentCityInStorage(searchCityInputValue);
+
     setCurrentCity(searchCityInputValue);
     setSearchCityInputValue('');
   }
 
   function handleCityFromLikeList(e) {
-    setCurrentCity(e.target.textContent)
+    const city = e.target.textContent;
+    addCurrentCityInStorage(city);
+    setCurrentCity(city);
   }
 
   return (

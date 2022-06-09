@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react'
+import { React} from 'react'
 import './css/style.css'
 import {
     TabsBody
@@ -8,11 +8,11 @@ import {
 } from './TabsItem'
 
 
-export function Tabs({ city }) {
+export function Tabs({ city, addCityInList }) {
 
     return (
         <div className="tabs">
-            <TabsBody city={city} />
+            <TabsBody city={city} addCityInList={addCityInList}/>
             <TabsItem />
         </div>
     );
