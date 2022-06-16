@@ -24,7 +24,7 @@ export function weatherIconURL(icon) {
 }
 
 export function addCurrentCityInStorage(city) {
-    Cookies.set('lastCity', city, { expires: (30 / 86400) });
+    Cookies.set('lastCity', city, { expires: (1) });
 }
 
 export function getCurrentCityFromStorage() {
@@ -33,7 +33,6 @@ export function getCurrentCityFromStorage() {
 
 export function getCityList() {
     const cityList = Cookies.get('cityList');
-    console.log(cityList);
     const cityListIsEmpty = cityList === undefined;
 
     if (cityListIsEmpty) {

@@ -1,11 +1,10 @@
 import React from 'react'
-import './css/style.css'
 import {
     temperatureDegrees,
     dateFromString,
     time,
     weatherIconURL
-} from './utils'
+} from '../../../../js/utils'
 
 export function TabForecast({ info }) {
     const {
@@ -15,7 +14,7 @@ export function TabForecast({ info }) {
         list
     } = info;
 
-    const forecastList = list.map(element => <ForecastElement info={element} />);
+    const forecastList = list.map(element => <ForecastElement info={element} key={JSON.stringify(element)}/>);
 
     return (
         <div id="Forecast" className="tab_block tab_Forecast">

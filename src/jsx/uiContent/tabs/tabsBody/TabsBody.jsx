@@ -1,36 +1,37 @@
 import { React, useEffect, useState } from 'react'
-import './css/style.css'
 import {
     TabNow
-} from './TabNow'
+} from './tab/TabNow'
 import {
     TabDetails
-} from './TabDetails'
+} from './tab/TabDetails'
 import {
     TabForecast
-} from './TabForecast'
+} from './tab/TabForecast'
 import {
     serverRequest,
     compilationURLCurrentWeather,
     compilationURLForecast
-} from './api'
+} from '../../../js/api'
 import {
     infoDefault,
     infoForecastDefault
-} from './const'
+} from '../../../js/const'
+import { useSelector } from 'react-redux'
 
-export function TabsBody({ city, addCityInList }) {
+export function TabsBody() {
+    const currentCity = useSelector(state => state.currentCity);
     const [weatherInfo, setWeatherInfo] = useState(infoDefault);
     const [weatherForecastInfo, setWeatherForecastInfo] = useState(infoForecastDefault);
 
     useEffect(() => {
-        serverRequest(compilationURLCurrentWeather(city)).then(result => setWeatherInfo(result));
-        serverRequest(compilationURLForecast(city)).then(result => setWeatherForecastInfo(result));
-    }, [city])
+        serverRequest(compilationURLCurrentWeather(currentCity)).then(result => setWeatherInfo(result));
+        serverRequest(compilationURLForecast(currentCity)).then(result => setWeatherForecastInfo(result));
+    }, [currentCity])
 
     return (
         <div className="tabs_body">
-            <TabNow info={weatherInfo} addCityInList={addCityInList}/>
+            <TabNow info={weatherInfo}/>
             <TabDetails info={weatherInfo} />
             <TabForecast info={weatherForecastInfo} />
         </div>

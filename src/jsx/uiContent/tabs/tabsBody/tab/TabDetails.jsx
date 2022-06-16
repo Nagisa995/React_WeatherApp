@@ -1,9 +1,8 @@
 import React from 'react'
-import './css/style.css'
 import {
     temperatureDegrees,
     time,
-} from './utils'
+} from '../../../../js/utils'
 
 export function TabDetails({ info }) {
     

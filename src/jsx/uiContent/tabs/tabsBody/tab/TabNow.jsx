@@ -1,19 +1,20 @@
 import React from 'react'
-import './css/style.css'
+import { useDispatch } from 'react-redux';
 import {
     backGroundIcon,
     temperatureDegrees,
-    getCityList,
     cityInList
-} from './utils'
+} from '../../../../js/utils'
+import {
+    addCityInLikeList
+} from '../../../../js/store/action'
 
-export function TabNow({ info, addCityInList }) {
+export function TabNow({ info }) {
+    const dispatch = useDispatch();
 
     function handleCityAdd() {
-        const сityOnList = cityInList(name);
-        if (!сityOnList) {
-            addCityInList(getCityList());
-        }
+        cityInList(name);
+        dispatch(addCityInLikeList(name));
     }
 
     const {
