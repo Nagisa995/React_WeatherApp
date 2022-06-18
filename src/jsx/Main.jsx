@@ -1,10 +1,5 @@
 import { React } from 'react'
-import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import {
-  weatherApp
-} from './js/store/reducer'
+import {  Link} from 'react-router-dom'
 import '../css/style.css'
 import {
   SearchForm
@@ -13,19 +8,12 @@ import {
   UIContent
 } from './uiContent/UIContent'
 
-const store = createStore(weatherApp);
-
-function Main() {
+export function Main() {
   return (
     <div className='main_body'>
       <SearchForm />
       <UIContent />
+      <Link to='/help'>About App</Link>
     </div>
   );
 }
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <Main />
-  </Provider>
-)
